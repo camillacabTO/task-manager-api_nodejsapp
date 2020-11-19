@@ -1,10 +1,10 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import dotenv from 'dotenv'
+// import dotenv from 'dotenv'
 import { router as userRouter } from './routers/user.js'
 import { router as taskRouter } from './routers/task.js'
 
-dotenv.config()
+// dotenv.config()
 const app = express()
 const PORT = process.env.PORT
 
