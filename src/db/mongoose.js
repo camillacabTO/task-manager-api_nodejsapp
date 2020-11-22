@@ -1,14 +1,11 @@
 import mongoose from 'mongoose'
-import { userModel as User } from '../models/user.js'
-import { taskModel as Task } from '../models/task.js'
 
-mongoose.connect('mongodb://localhost/task-manager-api', {
+mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 })
-
-const id = ''
 
 // User.findById(id).then(user => {
 //     return User.find({ age: user.age })
