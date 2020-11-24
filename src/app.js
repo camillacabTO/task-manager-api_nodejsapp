@@ -1,10 +1,8 @@
-import express from 'express'
-import './db/mongoose.js'
-import { router as userRouter } from './routers/user.js'
-import { router as taskRouter } from './routers/task.js'
+const express = require('express')
+require('./db/mongoose.js')
+const userRouter = require('./routers/user.js')
+const taskRouter = require('./routers/task.js')
 
-// import dotenv from 'dotenv'
-// dotenv.config()
 const app = express()
 
 app.use(express.urlencoded({ extended: true })) // instead of body parser
@@ -14,4 +12,4 @@ app.use('/users', userRouter)
 app.use('/tasks', taskRouter)
 
 // with middleware: new request -> do something -> run route handler
-export { app }
+module.exports = app

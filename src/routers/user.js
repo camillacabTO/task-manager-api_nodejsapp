@@ -1,9 +1,12 @@
-import express from 'express'
-import { User } from '../models/user.js'
-import { sendWelcomeEmail, sendCancellationEmail } from '../emails/accounts.js'
-import auth from '../middleware/auth.js'
-import multer from 'multer'
-import sharp from 'sharp'
+const express = require('express')
+const User = require('../models/user.js')
+const {
+  sendWelcomeEmail,
+  sendCancellationEmail
+} = require('../emails/accounts.js')
+const auth = require('../middleware/auth.js')
+const multer = require('multer')
+const sharp = require('sharp')
 
 const router = new express.Router()
 
@@ -214,4 +217,4 @@ router.post('/logoutAll', auth, async (req, res) => {
   }
 })
 
-export { router }
+module.exports = router

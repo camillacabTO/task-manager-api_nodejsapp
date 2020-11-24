@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
-import assert from 'assert'
-import validator from 'validator'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { taskModel as Task } from './task.js'
+const mongoose = require('mongoose')
+const assert = require('assert')
+const validator = require('validator')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const Task = require('./task.js')
 
 const { Schema } = mongoose
 
@@ -134,7 +134,9 @@ userSchema.pre('remove', async function (next) {
   next()
 })
 
-export const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema)
+
+module.exports = User
 
 // const me = new userModel({
 //     name: 'Mary',

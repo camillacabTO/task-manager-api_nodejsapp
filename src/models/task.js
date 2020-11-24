@@ -1,10 +1,8 @@
-import mongoose from 'mongoose'
-import assert from 'assert'
-import validator from 'validator'
+const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 
-const Task = new Schema(
+const taskSchema = new Schema(
   {
     description: {
       type: String,
@@ -27,7 +25,9 @@ const Task = new Schema(
   }
 )
 
-export const taskModel = mongoose.model('Task', Task)
+const Task = mongoose.model('Task', taskSchema)
+
+module.exports = Task
 
 // mongoose changes the name. lower case and plural
 

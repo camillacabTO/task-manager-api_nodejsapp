@@ -1,6 +1,6 @@
-import express from 'express'
-import { taskModel as Task } from '../models/task.js'
-import auth from '../middleware/auth.js'
+const express = require('express')
+const Task = require('../models/task.js')
+const auth = require('../middleware/auth.js')
 const router = new express.Router()
 
 router
@@ -120,4 +120,4 @@ router
     }
   })
 
-export { router }
+module.exports = router

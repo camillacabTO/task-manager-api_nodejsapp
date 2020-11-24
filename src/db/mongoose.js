@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 mongoose.connect(process.env.MONGODB_URL, {
   useNewUrlParser: true,
@@ -6,6 +6,8 @@ mongoose.connect(process.env.MONGODB_URL, {
   useUnifiedTopology: true,
   useFindAndModify: false
 })
+
+console.log(process.env.MONGODB_URL)
 
 // User.findById(id).then(user => {
 //     return User.find({ age: user.age })

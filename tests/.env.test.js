@@ -1,5 +1,3 @@
-const dotenv = require('dotenv')
-dotenv.config({ path: './env' })
 describe('env', () => {
   it('should have a client id', () => {
     expect(process.env.SENDGRID_API_KEY).toBeDefined()

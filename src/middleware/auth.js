@@ -1,7 +1,7 @@
-import jwt from 'jsonwebtoken'
-import { User } from '../models/user.js'
+const jwt = require('jsonwebtoken')
+const User = require('../models/user.js')
 
-export default async (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
     const token = req.header('Authorization').replace('Bearer ', '') // replace the first by the second. Cut out bearer
     const decodedUser = jwt.verify(token, process.env.JWT_SECRET)
