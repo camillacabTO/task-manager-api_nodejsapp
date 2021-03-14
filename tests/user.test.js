@@ -1,26 +1,9 @@
 const app = require('../src/app.js')
 const request = require('supertest')
 const User = require('../src/models/user.js')
-const mongoose = require('mongoose')
-const jwt = require('jsonwebtoken')
+const { userTest, setUpDatabase } = require('./context/dbSetup.js')
 
-const userTestID = new mongoose.Types.ObjectId()
-const userTest = {
-  _id: userTestID,
-  name: 'User Test',
-  email: 'iamatestuda@gmail.com',
-  password: 'canyoutestwithme?',
-  tokens: [
-    {
-      token: jwt.sign({ _id: userTestID }, process.env.JWT_SECRET)
-    }
-  ]
-}
-
-beforeEach(async () => {
-  await User.deleteMany() // erase all docs in DB
-  await new User(userTest).save() // adds a sample user for testing
-})
+beforeEach(setUpDatabase)
 
 test('Should create a new user', async () => {
   const res = await request(app)
@@ -88,4 +71,35 @@ test('Should delete user account', async () => {
 
 test('Should not delete user account of an unauthenticated user', async () => {
   await request(app).delete('/users/me').send().expect(403)
+})
+
+test('Should upload avatar image', async () => {
+  await request(app)
+    .post('/users/me/avatar')
+    .set('Authorization', `Bearer ${userTest.tokens[0].token}`)
+    .attach('avatar', 'tests/context/profile.jpg')
+    .expect(200)
+})
+
+test('Should update valid user details', async () => {
+  await request(app)
+    .patch('/users/me')
+    .set('Authorization', `Bearer ${userTest.tokens[0].token}`)
+    .send({
+      name: 'Luke The Dog'
+    })
+    .expect(200)
+
+  const user = await User.findById(userTest._id)
+  expect(user.name).toBe('Luke The Dog')
+})
+
+test('Should not update invalid user details', async () => {
+  await request(app)
+    .patch('/users/me')
+    .set('Authorization', `Bearer ${userTest.tokens[0].token}`)
+    .send({
+      genre: 'female'
+    })
+    .expect(400)
 })

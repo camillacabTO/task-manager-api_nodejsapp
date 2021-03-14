@@ -14,7 +14,7 @@ router
     })
     try {
       await task.save()
-      res.status(201).send(req.body) // CREATED
+      res.status(201).send(task) // CREATED
     } catch (error) {
       res.status(400).send(error) // BAD REQUEST
     }

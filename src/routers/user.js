@@ -14,7 +14,7 @@ const router = new express.Router()
 const upload = multer({
   // dest: 'avatars',  I want to save in the DB not in a folder
   limits: {
-    fileSize: 1000000
+    fileSize: 10000000
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpeg|png|jpg)$/)) {
